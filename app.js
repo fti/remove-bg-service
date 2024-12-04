@@ -4,8 +4,7 @@ import express from 'express';
 const app = express()
 const port = 3002
 app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
-
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 
 
 app.post('/bg-remove', (req, res) => {
@@ -22,7 +21,6 @@ app.post('/bg-remove', (req, res) => {
   const blob = base64ToBlob(base64, 'image/png');
 
   removeBackground(blob, config).then(async (blob) => {
-    // The result is a blob encoded as PNG. It can be converted to an URL to be used as HTMLImage.src
     res.contentType('image/png');
     const arrayBuffer = await blob.arrayBuffer();
     res.send(Buffer.from(arrayBuffer));
