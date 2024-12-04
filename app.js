@@ -30,7 +30,7 @@ app.post('/bg-remove', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Remove Background app listening on port ${port}`)
 })
 
 function base64ToBlob(base64, mimeType) {
