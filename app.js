@@ -11,7 +11,7 @@ app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.post('/bg-remove', (req, res) => {
   let base64 = req.body.base64;
   base64 = 'data:image/png;base64,' + base64;
-  
+  const imageUrl = "https://containsai.ams3.cdn.digitaloceanspaces.com/emojis/bf9a27a0-d438-4a97-95a7-281fba6f0733.png";
   const publicPath= `file://${path.resolve(`node_modules/@imgly/background-removal-node/dist/`)}/`;
 
   let config = {
@@ -26,7 +26,7 @@ app.post('/bg-remove', (req, res) => {
   };
   const blob = base64ToBlob(base64, 'image/png');
 
-  removeBackground(blob, config).then(async (blob) => {
+  removeBackground(imageUrl, config).then(async (blob) => {
     res.contentType('image/png');
     const arrayBuffer = await blob.arrayBuffer();
     res.send(Buffer.from(arrayBuffer));
