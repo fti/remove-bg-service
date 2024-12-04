@@ -1,6 +1,6 @@
 import { removeBackground } from '@imgly/background-removal-node';
-import { createRequire } from 'node:module';
 import express from 'express';
+import path from 'node:path';
 
 const app = express()
 const port = 3002
@@ -12,7 +12,7 @@ app.post('/bg-remove', (req, res) => {
   let base64 = req.body.base64;
   base64 = 'data:image/png;base64,' + base64;
   
-  const publicPath = 'file://' + createRequire(import.meta.url).resolve('@imgly/background-removal-node');
+  const publicPath= `file://${path.resolve(`node_modules/@imgly/background-removal-node/dist/`)}/`;
 
   let config = {
     publicPath: publicPath,
