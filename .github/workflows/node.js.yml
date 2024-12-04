@@ -38,6 +38,7 @@ jobs:
           cd /opt/remove-bg-service
           git pull
           npm install
-          pm2 delete all
-          pm2 start npm -- start
+          pm2 delete remove-bg-service
+          pm2 start npm -- start --name remove-bg-service
+
           
